@@ -13,25 +13,42 @@ c.Titulaire = client;
 c.Depot(100);
 c.Retrait(1000);
 
+Courant c2 = new Courant()
+{
+    Numero = "456",
+    LigneDeCredit = 500,
+    Titulaire = client,
+};
+
+c2.Depot(1000);
+
 Banque belfius = new Banque();
 belfius.Nom = "Belfius";
 
 belfius.Ajouter(c);
+belfius.Ajouter(c2);
 
-Console.WriteLine(belfius["123"].Titulaire.DateNaiss.Day);
-
-Courant nouveauCompte = creerCompte();
-
-belfius.Ajouter(nouveauCompte);
-
-foreach(Courant compte in belfius.Comptes.Values)
+Epargne e = new Epargne()
 {
-    Console.WriteLine(compte);
-}
 
-Console.WriteLine("Quel compte voulez vous regarder? ");
-string num = Console.ReadLine();
-Console.WriteLine(belfius[num]);
+};
+
+//Console.WriteLine(belfius["123"].Titulaire.DateNaiss.Day);
+
+//Courant nouveauCompte = creerCompte();
+
+//belfius.Ajouter(nouveauCompte);
+
+//foreach(Courant compte in belfius.Comptes.Values)
+//{
+//    Console.WriteLine(compte);
+//}
+
+//Console.WriteLine("Quel compte voulez vous regarder? ");
+//string num = Console.ReadLine();
+//Console.WriteLine(belfius[num]);
+
+Console.WriteLine(belfius.AvoirDesComptes(client));
 
 Courant creerCompte()
 {

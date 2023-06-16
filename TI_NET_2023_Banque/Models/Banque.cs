@@ -44,5 +44,39 @@ namespace TI_NET_2023_Banque.Models
         {
             Comptes.Remove(numero);
         }
+
+        /// <summary>
+        /// Permet de connaitre les avoirs d'une personne p
+        /// </summary>
+        /// <param name="p">La personne en question</param>
+        /// <returns>La somme de tout ses comptes en positif</returns>
+        public decimal AvoirDesComptes(Personne p)
+        {
+            decimal somme = 0;
+
+            // On parcourt tout le dictionnaire (la clef et la valeur) dans un KeyValuePair
+
+            //foreach(KeyValuePair<string,Courant> kvp in Comptes)
+            //{
+            //    if(kvp.Value.Titulaire == p)
+            //    {
+            //        somme += kvp.Value;
+            //    }
+            //}
+
+            // On parcourt les Valeurs du dictionnaire pour les sommer dans une variable locale
+            foreach (Courant c in Comptes.Values)
+            {
+                if (c.Titulaire == p)
+                {
+                    somme += c;
+                }
+            }
+
+            return somme;
+
+            // LinQ
+            //return Comptes.Values.Where(c => c.Titulaire == p).Sum(c => c.Solde);
+        }
     }
 }

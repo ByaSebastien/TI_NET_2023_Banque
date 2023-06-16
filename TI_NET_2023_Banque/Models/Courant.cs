@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TI_NET_2023_Banque.Models
 {
-    public class Courant
+    public class Courant : Compte
     {
         private decimal _ligneDeCredit;
         public decimal LigneDeCredit
@@ -26,39 +26,11 @@ namespace TI_NET_2023_Banque.Models
             }
         }
 
-        public string Numero { get; set; }
-
-        public decimal Solde { get; private set; }
-
-        public Personne Titulaire {  get; set; }
-
-        public void Depot(decimal montant)
+        public override void Retrait(decimal montant)
         {
-            if(montant < 0)
-            {
-                return;
-            }
-            Solde += montant;
-        }
-
-        public void Retrait(decimal montant)
-        {
-            if(montant < 0)
-            {
-                return;
-            }
-            if(Solde - montant < -LigneDeCredit)
-            {
-                return;
-            }
-            Solde -= montant;
-        }
-
-        public override string ToString()
-        {
-            return $"Numero : {Numero}\n" +
-                   $"Titulaire : {Titulaire.Prenom}" +
-                   $"_____________________________________________";
+            // Appel de la surcharge de la methode retrait de la class parent (Compte)
+            // etant donné que la surcharge n'est pas virtual et jamais override le base. n'est pas necessaire
+            base.Retrait(montant,LigneDeCredit);
         }
     }
 }
